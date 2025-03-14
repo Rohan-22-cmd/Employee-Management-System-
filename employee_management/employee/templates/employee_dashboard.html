@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Dashboard</title>
+</head>
+<body>
+    <h2>Employee Dashboard</h2>
+
+    <a href="{% url 'add_employee' %}">Add Employee</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Select Role</th>
+                <th>Select Department</th>
+                <th>Allocate Reporting Manager</th>
+                <th>Date of Joining</th>
+                <th>Username</th>
+                <th>Set Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.first_name }}</td>
+                    <td>{{ employee.last_name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.mobile }}</td>
+
+                    <!-- Role Dropdown -->
+                    <td>
+                        <select name="role" id="role_{{ employee.id }}">
+                            {% for role in roles %}
+                                <option value="{{ role.id }}" {% if role.id == employee.role.id %}selected{% endif %}>
+                                    {{ role.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <!-- Department Dropdown -->
+                    <td>
+                        <select name="department" id="dept_{{ employee.id }}">
+                            {% for dept in departments %}
+                                <option value="{{ dept.id }}" {% if dept.id == employee.department.id %}selected{% endif %}>
+                                    {{ dept.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>{{ employee.reporting_manager.first_name if employee.reporting_manager else 'N/A' }}</td>
+                    <td>{{ employee.date_of_joining }}</td>
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.password }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

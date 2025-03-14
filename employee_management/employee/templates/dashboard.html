@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        /* General styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        /* Table and general styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Styling for the Add New Employee button */
+        .add-employee-button {
+            background-color: green;  /* Green background */
+            color: white;
+            padding: 10px 20px;       /* Padding to make the button bigger */
+            border-radius: 5px;       /* Rounded corners */
+            text-decoration: none;    /* Remove underline */
+            font-weight: bold;        /* Make text bold */
+            display: inline-block;    /* Display as block for padding to work */
+            margin-bottom: 20px;      /* Space below the button */
+        }
+
+        /* Styling for Edit and Delete buttons */
+        .edit-button {
+            background-color: orange;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+<!-- Link to Add New Employee -->
+<a href="{% url 'add_user' %}" class="add-employee-button">Add New Employee</a>
+
+
+
+<!-- Table to display employee data -->
+<table>
+    <thead>
+        <tr>
+            <th>Sr. No.</th> <!-- Added Serial Number column -->
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>Reporting Manager</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Edit</th> <!-- Separate Edit column -->
+            <th>Delete</th> <!-- Separate Delete column -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <!-- Displaying Sr. No. using the counter -->
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.Email }}</td>
+            <td>{{ user.Mobile_Number }}</td>
+            <td>{{ user.select_dept.name }}</td>
+            <td>{{ user.select_role.name }}</td>           
+            <td>{{ user.Allcate_Reporting_Manager.first_name }} {{ user.Allcate_Reporting_Manager.last_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.Set_password }}</td>
+            <td>
+                <!-- Edit Action -->
+                <a href="{% url 'update_user' user.id %}" class="edit-button">Edit</a>
+            </td>
+            <td>
+                <!-- Delete Action -->
+                <a href="{% url 'delete_user' user.id %}" class="delete-button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

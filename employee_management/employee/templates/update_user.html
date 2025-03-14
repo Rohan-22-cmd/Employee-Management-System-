@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee</title>
+    <style>
+        /* General styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Horizontally centers the content */
+            align-items: center; /* Vertically centers the content */
+            height: 100vh; /* Makes sure the page takes full viewport height */
+            background-color: #f4f4f4; /* Light background for the page */
+        }
+
+        /* Styling for the heading */
+        h1 {
+            color: #333;
+            margin-bottom: 20px; /* Adds space between the heading and the form */
+        }
+
+        /* Styling for the form */
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds some shadow */
+            width: 100%;
+            max-width: 600px; /* Limit form width */
+        }
+
+        /* Styling for the button */
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%; /* Make button take full width of the form */
+            margin-top: 10px; /* Space above the button */
+        }
+
+        button:hover {
+            background-color: darkgreen; /* Darker green on hover */
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Update Employee</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Employee</button>
+    </form>
+
+</body>
+</html>
